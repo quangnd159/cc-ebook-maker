@@ -1,0 +1,19 @@
+{
+  "book": {
+    "title": "My Book Title",
+    "author": "Author Name",
+    "language": "en",
+    "publisher": "",
+    "description": ""
+  },
+  "formatting": {
+    "chapter_heading_level": "h1",
+    "paragraph_separator": "\n\n",
+    "include_toc": true,
+    "css_style": "default"
+  },
+  "output": {
+    "filename": "output.epub",
+    "directory": "."
+  }
+}
