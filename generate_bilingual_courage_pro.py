@@ -16,10 +16,12 @@ book.set_language('vi')
 book.add_author('Kishimi Ichiro')
 book.add_author('Koga Fumitake')
 
-# Professional CSS stylesheet with best practices for e-readers
+# Professional CSS stylesheet optimized for KOReader html5.css mode
+# Following best practices: line-height on body only, no inline styles
 style = '''
 @namespace epub "http://www.idpf.org/2007/ops";
 
+/* Base styles - line-height on body only (Kobo best practice) */
 body {
     font-family: Georgia, serif;
     line-height: 1.7;
@@ -27,11 +29,11 @@ body {
     text-align: justify;
 }
 
-h1, h2 {
+/* Headings inherit line-height from body */
+h1, h2, h3, h4, h5, h6 {
     font-family: Georgia, serif;
     text-align: left;
     font-weight: normal;
-    line-height: 1.4;
     margin-top: 2em;
     margin-bottom: 1em;
 }
@@ -46,61 +48,60 @@ h2 {
     font-size: 1.2em;
 }
 
+h3 {
+    font-size: 1.1em;
+}
+
+/* Paragraphs */
 p {
     margin: 0;
     text-indent: 0;
     margin-bottom: 0.5em;
 }
 
-.chinese {
+/* Bilingual content */
+p.chinese {
     font-size: 1.05em;
-    line-height: 1.8;
     margin-bottom: 0.3em;
     color: #000;
 }
 
-.vietnamese {
+p.vietnamese {
     font-size: 1em;
-    line-height: 1.7;
     font-style: italic;
     margin-bottom: 1.8em;
-    color: #333;
+    color: #666;
 }
 
+/* Glossary styling */
 .glossary-term {
-    background-color: #fafaf0;
-    border: 0.05em solid #ccc;
-    border-radius: 0.2em;
-    padding: 0.8em;
-    margin: 0.8em 0;
+    margin: 1.5em 0;
 }
 
 .term-chinese {
     font-weight: bold;
     font-size: 1.1em;
-    color: #8b4513;
+    color: #000;
 }
 
 .term-arrow {
-    color: #2e7d32;
-    font-weight: bold;
+    color: #666;
 }
 
 .term-vietnamese {
-    color: #2e7d32;
+    color: #666;
     font-weight: bold;
 }
 
 .term-explanation {
-    margin-top: 0.5em;
-    color: #555;
-    line-height: 1.6;
+    margin-top: 0.3em;
+    color: #666;
 }
 '''
 
 # Create CSS file
-nav_css = epub.EpubItem(uid="style_nav", file_name="style/nav.css", media_type="text/css", content=style)
-book.add_item(nav_css)
+main_css = epub.EpubItem(uid="style_main", file_name="style/style.css", media_type="text/css", content=style)
+book.add_item(main_css)
 
 # Create glossary chapter
 glossary_html = f'''<?xml version="1.0" encoding="UTF-8"?>
@@ -108,7 +109,7 @@ glossary_html = f'''<?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head>
     <title>Bảng Thuật Ngữ</title>
-    <link rel="stylesheet" href="style/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="style/style.css" type="text/css"/>
 </head>
 <body>
     <h1>Bảng Thuật Ngữ / Glossary of Terms</h1>
@@ -209,6 +210,7 @@ glossary_html = f'''<?xml version="1.0" encoding="UTF-8"?>
 
 glossary = epub.EpubHtml(title='Bảng Thuật Ngữ', file_name='glossary.xhtml', lang='vi')
 glossary.set_content(glossary_html.encode('utf-8'))
+glossary.add_item(main_css)
 book.add_item(glossary)
 
 # Main chapter with bilingual content
@@ -217,7 +219,7 @@ chapter_html = '''<?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head>
     <title>引言</title>
-    <link rel="stylesheet" href="style/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="style/style.css" type="text/css"/>
 </head>
 <body>
     <h2>引言</h2>
@@ -377,6 +379,7 @@ chapter_html = '''<?xml version="1.0" encoding="UTF-8"?>
 
 chapter1 = epub.EpubHtml(title='引言', file_name='chapter1.xhtml', lang='zh')
 chapter1.set_content(chapter_html.encode('utf-8'))
+chapter1.add_item(main_css)
 book.add_item(chapter1)
 
 # Define Table of Contents

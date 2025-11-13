@@ -78,32 +78,27 @@ p {
 
 /* Glossary styling */
 .glossary-term {
-    background-color: #fafaf0;
-    border: 0.1em solid #ccc;
-    border-radius: 0.2em;
-    padding: 0.8em;
-    margin: 0.8em 0;
+    margin: 1.5em 0;
 }
 
 .term-original {
     font-weight: bold;
     font-size: 1.1em;
-    color: #8b4513;
+    color: #000;
 }
 
 .term-arrow {
-    color: #2e7d32;
-    font-weight: bold;
+    color: #666;
 }
 
 .term-translation {
-    color: #2e7d32;
+    color: #666;
     font-weight: bold;
 }
 
 .term-explanation {
-    margin-top: 0.5em;
-    color: #555;
+    margin-top: 0.3em;
+    color: #666;
 }
 '''
 
@@ -133,8 +128,8 @@ p {
 
         # Create and add CSS stylesheet
         self.css = epub.EpubItem(
-            uid="style_nav",
-            file_name="style/nav.css",
+            uid="style_main",
+            file_name="style/style.css",
             media_type="text/css",
             content=self.DEFAULT_CSS
         )
@@ -187,7 +182,7 @@ p {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head>
     <title>{title}</title>
-    <link rel="stylesheet" href="style/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="style/style.css" type="text/css"/>
 </head>
 <body>
     <h2>{title}</h2>
@@ -202,6 +197,9 @@ p {
 
         # Set content
         chapter.set_content(html_content.encode('utf-8'))
+
+        # Link CSS to chapter
+        chapter.add_item(self.css)
 
         # Add to book
         self.book.add_item(chapter)
@@ -237,7 +235,7 @@ p {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head>
     <title>{title}</title>
-    <link rel="stylesheet" href="style/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="style/style.css" type="text/css"/>
 </head>
 <body>
     <h2>{title}</h2>
@@ -252,6 +250,7 @@ p {
         html_content += '</body>\n</html>'
 
         chapter.set_content(html_content.encode('utf-8'))
+        chapter.add_item(self.css)
         self.book.add_item(chapter)
         self.chapters.append(chapter)
 
@@ -281,7 +280,7 @@ p {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head>
     <title>{title}</title>
-    <link rel="stylesheet" href="style/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="style/style.css" type="text/css"/>
 </head>
 <body>
     <h1>{title}</h1>
@@ -300,6 +299,7 @@ p {
         html_content += '</body>\n</html>'
 
         glossary.set_content(html_content.encode('utf-8'))
+        glossary.add_item(self.css)
         self.book.add_item(glossary)
         self.chapters.insert(0, glossary)  # Put glossary first
 
