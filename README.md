@@ -13,6 +13,15 @@ Built with **EbookLib** and following EPUB best practices:
 ✓ **Full EPUB3 compliance** - Works everywhere
 ✓ **Beautiful bilingual support** - Original text + italicized translations
 ✓ **Professional glossaries** - Styled term explanations
+✓ **Optimized for html5.css** - Modern HTML standard rendering
+
+### KOReader Users (Kobo, Kindle, etc.)
+
+For best results with KOReader:
+- Go to **Style** settings
+- Select **"HTML standard rendering (html5.css)"**
+- This is the modern standard that our CSS is optimized for
+- Legacy "epub.css" mode may not display styles correctly
 
 ## How It Works
 

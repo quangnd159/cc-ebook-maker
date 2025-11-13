@@ -18,10 +18,13 @@ class EbookMaker:
     Uses EbookLib with CSS best practices for e-readers.
     """
 
-    # Professional CSS stylesheet optimized for e-readers
+    # Professional CSS stylesheet optimized for modern e-readers
+    # Designed for KOReader's html5.css (HTML standard rendering) mode
+    # Follows best practices: line-height on body only, no inline styles
     DEFAULT_CSS = '''
 @namespace epub "http://www.idpf.org/2007/ops";
 
+/* Base styles - line-height on body only (Kobo best practice) */
 body {
     font-family: Georgia, serif;
     line-height: 1.7;
@@ -29,11 +32,11 @@ body {
     text-align: justify;
 }
 
+/* Headings inherit line-height from body */
 h1, h2, h3, h4, h5, h6 {
     font-family: Georgia, serif;
     text-align: left;
     font-weight: normal;
-    line-height: 1.4;
     margin-top: 2em;
     margin-bottom: 1em;
 }
@@ -52,30 +55,31 @@ h3 {
     font-size: 1.1em;
 }
 
+/* Paragraphs */
 p {
     margin: 0;
     text-indent: 0;
     margin-bottom: 0.5em;
 }
 
+/* Bilingual content */
 .original-text {
     font-size: 1.05em;
-    line-height: 1.8;
     margin-bottom: 0.3em;
     color: #000;
 }
 
 .translation {
     font-size: 1em;
-    line-height: 1.7;
     font-style: italic;
     margin-bottom: 1.8em;
     color: #333;
 }
 
+/* Glossary styling */
 .glossary-term {
     background-color: #fafaf0;
-    border: 0.05em solid #ccc;
+    border: 0.1em solid #ccc;
     border-radius: 0.2em;
     padding: 0.8em;
     margin: 0.8em 0;
@@ -100,7 +104,6 @@ p {
 .term-explanation {
     margin-top: 0.5em;
     color: #555;
-    line-height: 1.6;
 }
 '''
 
